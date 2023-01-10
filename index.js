@@ -1,5 +1,6 @@
 
 document.getElementById('submit').addEventListener('click', e => {
+
     e.preventDefault();
     findCharacter();
 })
@@ -14,6 +15,10 @@ function findCharacter() {
                 .then(quotes => {
                     console.log(quotes)
                     let str = ''
+                    if (document.getElementsByClassName('content')[0]) {
+                        document.getElementsByClassName('content')[0].remove()
+                    }
+
                     quotes.forEach(quote => {
                         console.log(quote)
 
