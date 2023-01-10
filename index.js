@@ -9,7 +9,7 @@ function findCharacter() {
     const searchCharacter = document.getElementById('search-character').value
     if (searchCharacter) {
         try {
-            fetch(`https://animechan.vercel.app/api/random/character?name=${searchCharacter}`)
+            fetch(`https://animechan.vercel.app/api/quotes/character?name=${searchCharacter}`)
                 .then(response => response.json())
                 .then(quotes => {
                     console.log(quotes)
