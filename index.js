@@ -1,10 +1,43 @@
 
-const h1 = document.querySelectorAll('h1')[0];
+document.getElementById('submit').addEventListener('click', e => {
+    e.preventDefault();
+    findCharacter();
+})
 
-fetch('https://animechan.vercel.app/api/random')
-    .then(response => response.json())
-    .then(quote => {
-        console.log(quote)
-        h1.innerText = quote.anime
-    })
 
+function findCharacter() {
+    const searchCharacter = document.getElementById('search-character').value
+    if (searchCharacter) {
+        try {
+            fetch(`https://animechan.vercel.app/api/random/character?name=${searchCharacter}`)
+                .then(response => response.json())
+                .then(quotes => {
+                    console.log(quotes)
+                    let str = ''
+                    quotes.forEach(quote => {
+                        console.log(quote)
+
+                        str += `<h5>${quote.anime}</h5><p>${quote.quote}</p>`
+                        // const h5 = document.createElement('h5');
+                        // const node = document.createTextNode(quote.anime);
+                        // h5.appendChild(node);
+                        // document.body.appendChild(h5);
+
+                        // const p = document.createElement('p');
+                        // p.innerText = quote.quote
+
+                        // document.body.appendChild(p);
+                    })
+                    const div = document.createElement('div');
+                    div.classList.add('content')
+                    div.innerHTML = str
+                    document.body.appendChild(div);
+
+                })
+
+
+        } catch (err) {
+            console.log(err.message)
+        }
+    }
+}
